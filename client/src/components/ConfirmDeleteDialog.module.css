@@ -1,0 +1,86 @@
+/* ── Confirm dialog ── */
+.dialog {
+  max-width: 400px;
+  padding: var(--space-xl);
+  text-align: center;
+  width: 90vw;
+}
+
+.icon {
+  font-size: 2.4rem;
+  margin-bottom: var(--space-sm);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-sm);
+}
+
+.body {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0 0 var(--space-lg);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+/* ── Undo toast ── */
+.toastWrapper {
+  bottom: var(--space-xl);
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 200;
+  animation: slideUp 200ms ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.toast {
+  align-items: center;
+  display: flex;
+  gap: var(--space-md);
+  min-width: 320px;
+  overflow: hidden;
+  padding: var(--space-md) var(--space-lg);
+  position: relative;
+}
+
+.toastMsg {
+  flex: 1;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.undoBtn {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  padding: 5px 14px;
+}
+
+.progressBar {
+  background: linear-gradient(90deg, #6c63ff, #a78bfa);
+  bottom: 0;
+  height: 3px;
+  left: 0;
+  position: absolute;
+  transition: width 100ms linear;
+}

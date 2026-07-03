@@ -1,0 +1,180 @@
+.wrapper {
+  padding-top: var(--space-sm);
+}
+
+.calendarContainer {
+  overflow: hidden;
+  padding: var(--space-lg);
+}
+
+/* ─────────────────────────────────────────────
+   Override react-big-calendar default styles
+   to match the glassmorphism theme.
+───────────────────────────────────────────── */
+
+.calendarContainer :global(.rbc-calendar) {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-body);
+}
+
+/* Toolbar */
+.calendarContainer :global(.rbc-toolbar) {
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.calendarContainer :global(.rbc-toolbar-label) {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.calendarContainer :global(.rbc-btn-group button),
+.calendarContainer :global(.rbc-toolbar button) {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-sm);
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  transition: all var(--transition-fast);
+}
+
+.calendarContainer :global(.rbc-btn-group button:hover),
+.calendarContainer :global(.rbc-toolbar button:hover) {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.calendarContainer :global(.rbc-btn-group button.rbc-active),
+.calendarContainer :global(.rbc-toolbar button.rbc-active) {
+  background: rgba(108, 99, 255, 0.3);
+  border-color: rgba(108, 99, 255, 0.5);
+  color: #fff;
+}
+
+/* Month / day grid */
+.calendarContainer :global(.rbc-month-view),
+.calendarContainer :global(.rbc-time-view),
+.calendarContainer :global(.rbc-agenda-view) {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.calendarContainer :global(.rbc-header) {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 8px 4px;
+  text-transform: uppercase;
+}
+
+.calendarContainer :global(.rbc-day-bg) {
+  background: transparent;
+}
+
+.calendarContainer :global(.rbc-day-bg + .rbc-day-bg),
+.calendarContainer :global(.rbc-header + .rbc-header) {
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.calendarContainer :global(.rbc-month-row + .rbc-month-row) {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.calendarContainer :global(.rbc-today) {
+  background: rgba(108, 99, 255, 0.12);
+}
+
+.calendarContainer :global(.rbc-off-range-bg) {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.calendarContainer :global(.rbc-date-cell) {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  text-align: right;
+}
+
+.calendarContainer :global(.rbc-date-cell.rbc-now > a) {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.calendarContainer :global(.rbc-show-more) {
+  background: transparent;
+  color: rgba(108, 99, 255, 0.9);
+  font-size: 0.72rem;
+}
+
+/* Time grid */
+.calendarContainer :global(.rbc-timeslot-group) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.calendarContainer :global(.rbc-time-slot) {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.72rem;
+}
+
+.calendarContainer :global(.rbc-current-time-indicator) {
+  background: var(--color-primary);
+  opacity: 0.75;
+}
+
+/* Popup (show-more) */
+.calendarContainer :global(.rbc-overlay) {
+  background: rgba(18, 8, 50, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  color: #fff;
+  padding: var(--space-sm);
+}
+
+.calendarContainer :global(.rbc-overlay-header) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-xs);
+}
+
+/* Agenda view */
+.calendarContainer :global(.rbc-agenda-view table.rbc-agenda-table) {
+  border: none;
+}
+
+.calendarContainer
+  :global(.rbc-agenda-view table.rbc-agenda-table thead > tr > th) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.75rem;
+  padding: 6px 8px;
+  text-transform: uppercase;
+}
+
+.calendarContainer
+  :global(.rbc-agenda-view table.rbc-agenda-table tbody > tr > td) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px;
+}
+
+.calendarContainer :global(.rbc-agenda-date-cell),
+.calendarContainer :global(.rbc-agenda-time-cell) {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+}

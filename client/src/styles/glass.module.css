@@ -1,0 +1,76 @@
+/* ─────────────────────────────────────────────
+   Glass surface utility classes
+   Import this module and apply class names.
+───────────────────────────────────────────── */
+
+/* Base glass card / panel */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Pill-shaped glass button */
+.glassBtn {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 20px;
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.glassBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 24px rgba(108, 99, 255, 0.28);
+}
+
+.glassBtn:active {
+  transform: scale(0.97);
+}
+
+.glassBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Danger variant */
+.glassDanger {
+  composes: glassBtn;
+  border-color: rgba(255, 85, 85, 0.45);
+  box-shadow: 0 4px 16px rgba(255, 85, 85, 0.1);
+}
+
+.glassDanger:hover {
+  background: rgba(255, 85, 85, 0.2);
+  box-shadow: 0 6px 24px rgba(255, 85, 85, 0.3);
+}
+
+/* Full-screen dim overlay for modals */
+.overlay {
+  align-items: center;
+  background: rgba(5, 2, 18, 0.55);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}

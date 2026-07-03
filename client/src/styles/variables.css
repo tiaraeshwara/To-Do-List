@@ -1,0 +1,72 @@
+/* ─────────────────────────────────────────────
+   CSS Reset + Base
+───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* ─────────────────────────────────────────────
+   Design Tokens
+───────────────────────────────────────────── */
+:root {
+  /* Brand / Status colours */
+  --color-primary: #6c63ff;
+  --color-todo: #4d9fff;
+  --color-doing: #ffb347;
+  --color-done: #4caf80;
+
+  /* Glass surface */
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+
+  /* Typography */
+  --font-display: "Syne", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+/* ─────────────────────────────────────────────
+   Scrollbar
+───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
