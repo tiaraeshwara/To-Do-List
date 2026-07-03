@@ -1,0 +1,223 @@
+/* ── Bell button ── */
+.wrapper {
+  position: relative;
+}
+
+.bellBtn {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  height: 38px;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  transition: all var(--transition-fast);
+  width: 38px;
+}
+
+.bellBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.bellBtn.hasAlert {
+  background: rgba(255, 179, 71, 0.15);
+  border-color: rgba(255, 179, 71, 0.4);
+  animation: bellShake 2.5s ease infinite;
+}
+
+@keyframes bellShake {
+  0%,
+  85%,
+  100% {
+    transform: rotate(0deg);
+  }
+  88% {
+    transform: rotate(-15deg);
+  }
+  92% {
+    transform: rotate(15deg);
+  }
+  96% {
+    transform: rotate(-8deg);
+  }
+  98% {
+    transform: rotate(8deg);
+  }
+}
+
+.bellIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.badge {
+  align-items: center;
+  background: #ff5555;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-pill);
+  color: #fff;
+  display: flex;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 16px;
+  justify-content: center;
+  min-width: 16px;
+  padding: 0 3px;
+  position: absolute;
+  right: -3px;
+  top: -3px;
+}
+
+/* ── Dropdown panel ── */
+.panel {
+  animation: fadeDown 160ms ease;
+  min-width: 300px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 320px;
+  z-index: 80;
+  overflow: hidden;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panelHeader {
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-md) var(--space-sm);
+}
+
+.panelTitle {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.enableBtn {
+  background: rgba(108, 99, 255, 0.22);
+  border: 1px solid rgba(108, 99, 255, 0.45);
+  border-radius: var(--radius-pill);
+  color: #c4b5fd;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  transition: all var(--transition-fast);
+}
+
+.enableBtn:hover {
+  background: rgba(108, 99, 255, 0.35);
+}
+
+.denied {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.7rem;
+}
+
+/* ── Groups ── */
+.groups {
+  display: flex;
+  flex-direction: column;
+  max-height: 340px;
+  overflow-y: auto;
+  padding: var(--space-sm) 0;
+}
+
+.group {
+  padding: var(--space-xs) 0;
+}
+
+.groupLabel {
+  --grp-accent: var(--color-todo);
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  font-size: 0.7rem;
+  font-weight: 600;
+  gap: 6px;
+  letter-spacing: 0.06em;
+  padding: 4px var(--space-md) 4px;
+  text-transform: uppercase;
+}
+
+.groupDot {
+  background: var(--grp-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--grp-accent);
+  flex-shrink: 0;
+  height: 7px;
+  width: 7px;
+}
+
+.groupCount {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  font-size: 0.65rem;
+  margin-left: auto;
+  padding: 1px 7px;
+}
+
+/* ── Task rows ── */
+.taskRow {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  padding: 7px var(--space-md);
+  text-align: left;
+  transition: background var(--transition-fast);
+  width: 100%;
+}
+
+.taskRow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.taskTitle {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskDue {
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  font-size: 0.72rem;
+}
+
+/* ── Empty state ── */
+.empty {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.84rem;
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
