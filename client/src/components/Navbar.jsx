@@ -1,64 +1,60 @@
-import { useState } from 'react';
 import glassStyles from '../styles/glass.module.css';
 import styles from './Navbar.module.css';
-import TaskModal from './TaskModal.jsx';
 import NotificationPanel from './NotificationPanel.jsx';
 
 /**
- * Top navigation bar with app title, view toggle, and Add Task button.
+ * Top navigation bar.
  *
- * @param {{ view: 'board'|'calendar', onViewChange: (v: string) => void }} props
+ * @param {{
+ *   view: 'board'|'calendar'|'routine',
+ *   onViewChange: (v: string) => void,
+ *   onAddTask: () => void,
+ * }} props
  */
-export default function Navbar({ view, onViewChange }) {
-  const [showAddModal, setShowAddModal] = useState(false);
-
+export default function Navbar({ view, onViewChange, onAddTask }) {
   return (
-    <>
-      <nav className={`${glassStyles.glass} ${styles.navbar}`}>
-        <div className={styles.brand}>
-          <span className={styles.logo}>✦</span>
-          <h1 className={styles.title}>To-Do List</h1>
-        </div>
+    <nav className={`${glassStyles.glass} ${styles.navbar}`}>
+      <div className={styles.brand}>
+        <span className={styles.logo}>✦</span>
+        <h1 className={styles.title}>To-Do List</h1>
+      </div>
 
-        <div className={styles.controls}>
-          <div className={styles.viewToggle} role="group" aria-label="View selector">
-            <button
-              className={`${styles.toggleBtn} ${view === 'board' ? styles.active : ''}`}
-              onClick={() => onViewChange('board')}
-              aria-pressed={view === 'board'}
-            >
-              Board
-            </button>
-            <button
-              className={`${styles.toggleBtn} ${view === 'calendar' ? styles.active : ''}`}
-              onClick={() => onViewChange('calendar')}
-              aria-pressed={view === 'calendar'}
-            >
-              Calendar
-            </button>
-            <button
-              className={`${styles.toggleBtn} ${view === 'routine' ? styles.active : ''}`}
-              onClick={() => onViewChange('routine')}
-              aria-pressed={view === 'routine'}
-            >
-              📅 Routine
-            </button>
-          </div>
-
-          <NotificationPanel />
-
+      <div className={styles.controls}>
+        {/* View toggle — hidden on mobile (BottomNav handles it) */}
+        <div className={`${styles.viewToggle} ${styles.desktopOnly}`} role="group" aria-label="View selector">
           <button
-            className={`${glassStyles.glassBtn} ${styles.addBtn}`}
-            onClick={() => setShowAddModal(true)}
+            className={`${styles.toggleBtn} ${view === 'board' ? styles.active : ''}`}
+            onClick={() => onViewChange('board')}
+            aria-pressed={view === 'board'}
           >
-            + Add Task
+            Board
+          </button>
+          <button
+            className={`${styles.toggleBtn} ${view === 'calendar' ? styles.active : ''}`}
+            onClick={() => onViewChange('calendar')}
+            aria-pressed={view === 'calendar'}
+          >
+            Calendar
+          </button>
+          <button
+            className={`${styles.toggleBtn} ${view === 'routine' ? styles.active : ''}`}
+            onClick={() => onViewChange('routine')}
+            aria-pressed={view === 'routine'}
+          >
+            📅 Routine
           </button>
         </div>
-      </nav>
 
-      {showAddModal && (
-        <TaskModal mode="add" onClose={() => setShowAddModal(false)} />
-      )}
-    </>
+        <NotificationPanel />
+
+        {/* Add button — hidden on mobile (FAB in BottomNav handles it) */}
+        <button
+          className={`${glassStyles.glassBtn} ${styles.addBtn} ${styles.desktopOnly}`}
+          onClick={onAddTask}
+        >
+          + Add Task
+        </button>
+      </div>
+    </nav>
   );
 }

@@ -93,3 +93,23 @@
 .errorBanner:hover {
   background: rgba(255, 80, 80, 0.22);
 }
+
+/* ─────────────────────────────────────────────
+   Responsive helpers
+───────────────────────────────────────────── */
+
+/* Show only on mobile (≤ 768 px) */
+.mobileOnly {
+  display: none;
+}
+
+/* Extra bottom padding on mobile so content clears the BottomNav */
+@media (max-width: 768px) {
+  .mobileOnly {
+    display: block;
+  }
+
+  .main {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
