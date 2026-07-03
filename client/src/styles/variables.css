@@ -24,6 +24,7 @@ body,
   --color-todo: #4d9fff;
   --color-doing: #ffb347;
   --color-done: #4caf80;
+  --color-overdue: #ff5555;
 
   /* Glass surface */
   --glass-bg: rgba(255, 255, 255, 0.12);
