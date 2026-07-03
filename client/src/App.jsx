@@ -4,6 +4,7 @@ import { useTasks } from './hooks/useTasks.js';
 import Navbar from './components/Navbar.jsx';
 import Board from './components/Board.jsx';
 import CalendarView from './components/CalendarView.jsx';
+import DailyRoutine from './components/DailyRoutine.jsx';
 import styles from './App.module.css';
 
 function AppContent() {
@@ -42,7 +43,9 @@ function AppContent() {
       )}
 
       <main className={styles.main}>
-        {view === 'board' ? <Board /> : <CalendarView />}
+        {view === 'board' && <Board />}
+        {view === 'calendar' && <CalendarView />}
+        {view === 'routine' && <DailyRoutine />}
       </main>
     </div>
   );

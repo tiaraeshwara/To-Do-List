@@ -36,6 +36,13 @@ export default function Navbar({ view, onViewChange }) {
             >
               Calendar
             </button>
+            <button
+              className={`${styles.toggleBtn} ${view === 'routine' ? styles.active : ''}`}
+              onClick={() => onViewChange('routine')}
+              aria-pressed={view === 'routine'}
+            >
+              📅 Routine
+            </button>
           </div>
 
           <NotificationPanel />

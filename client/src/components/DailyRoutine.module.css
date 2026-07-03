@@ -1,0 +1,295 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 780px;
+  margin: 0 auto;
+  padding-top: var(--space-sm);
+}
+
+/* ── Header card ── */
+.headerCard {
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.headerTop {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+  background: linear-gradient(135deg, #86efac, #4ade80, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subheading {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.82rem;
+}
+
+.resetBtn {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+/* ── Progress ── */
+.progressWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.progressTrack {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  height: 8px;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: linear-gradient(90deg, #4ade80, #86efac);
+  border-radius: var(--radius-pill);
+  height: 100%;
+  transition: width 400ms ease;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+}
+
+.progressLabel {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+/* ── Section header ── */
+.sectionHeader {
+  --cat-color: #fff;
+  align-items: center;
+  color: var(--cat-color);
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: 0.1em;
+  margin-top: var(--space-sm);
+  padding: 2px 0;
+  text-transform: uppercase;
+}
+
+.sectionDot {
+  background: var(--cat-color);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--cat-color);
+  flex-shrink: 0;
+  height: 8px;
+  width: 8px;
+}
+
+/* ── Routine card ── */
+.card {
+  align-items: center;
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateX(3px);
+}
+
+/* Active (currently scheduled) */
+.card.active {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(74, 222, 128, 0.35);
+}
+
+/* Done */
+.card.done {
+  background: rgba(74, 222, 128, 0.07);
+  opacity: 0.72;
+}
+
+/* Past but not done */
+.card.past {
+  border-color: rgba(255, 80, 80, 0.2);
+}
+
+/* ── Time column ── */
+.timeCol {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 4px;
+  min-width: 72px;
+}
+
+.timeText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.durationBadge {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.68rem;
+  padding: 1px 7px;
+  white-space: nowrap;
+}
+
+/* ── Activity column ── */
+.activityCol {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.emoji {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.label {
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.labelDone {
+  color: rgba(255, 255, 255, 0.38);
+  text-decoration: line-through;
+}
+
+.nowPill {
+  background: rgba(74, 222, 128, 0.25);
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  border-radius: var(--radius-pill);
+  color: #86efac;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ── Mark Done button ── */
+.doneBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.doneBtn:hover {
+  background: rgba(74, 222, 128, 0.2);
+  border-color: rgba(74, 222, 128, 0.45);
+  color: #86efac;
+}
+
+.doneBtn.doneBtnActive {
+  background: rgba(74, 222, 128, 0.2);
+  border-color: rgba(74, 222, 128, 0.5);
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.doneBtn.doneBtnActive:hover {
+  background: rgba(255, 80, 80, 0.15);
+  border-color: rgba(255, 80, 80, 0.35);
+  color: #ff9a9a;
+}
+
+/* ── Timeline connector line ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+  padding-left: var(--space-xs);
+}
+
+.timeline::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(74, 222, 128, 0.3),
+    rgba(74, 222, 128, 0.05) 90%,
+    transparent
+  );
+  bottom: 0;
+  content: "";
+  left: 6px;
+  position: absolute;
+  top: 0;
+  width: 2px;
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .card {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .timeCol {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: unset;
+    width: 100%;
+  }
+
+  .doneBtn {
+    width: 100%;
+    text-align: center;
+  }
+}

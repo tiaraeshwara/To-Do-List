@@ -1,0 +1,304 @@
+/* ── Full-screen backdrop ── */
+.overlay {
+  align-items: center;
+  background: rgba(4, 15, 10, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 300;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   Confetti pieces
+───────────────────────────────────────────── */
+.piece {
+  animation: confettiFall var(--dur, 4s) ease-in var(--del, 0s) both;
+  border-radius: 2px;
+  pointer-events: none;
+  position: absolute;
+  top: -20px;
+  will-change: transform, opacity;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.ribbon {
+  border-radius: 1px;
+  width: 4px !important;
+  height: 18px !important;
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(110vh) translateX(var(--drift, 0px))
+      rotate(var(--spin, 360deg));
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Floating emoji particles
+───────────────────────────────────────────── */
+.floatEmoji {
+  animation: emojiFloat var(--dur, 5s) ease-in var(--del, 0s) both;
+  pointer-events: none;
+  position: absolute;
+  top: -40px;
+  user-select: none;
+}
+
+@keyframes emojiFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(0.4);
+  }
+  15% {
+    opacity: 1;
+    scale: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(105vh) translateX(var(--drift, 0px)) scale(0.8);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Central celebration card
+───────────────────────────────────────────── */
+.card {
+  align-items: center;
+  animation: cardPop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  background: rgba(10, 30, 20, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 28px;
+  box-shadow:
+    0 0 0 1px rgba(74, 222, 128, 0.15),
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(74, 222, 128, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 420px;
+  padding: var(--space-2xl) var(--space-xl);
+  position: relative;
+  text-align: center;
+  width: 90vw;
+  z-index: 1;
+}
+
+@keyframes cardPop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Trophy ring ── */
+.trophyRing {
+  align-items: center;
+  background: radial-gradient(
+    circle,
+    rgba(74, 222, 128, 0.25),
+    transparent 70%
+  );
+  border: 2px solid rgba(74, 222, 128, 0.4);
+  border-radius: 50%;
+  display: flex;
+  height: 90px;
+  justify-content: center;
+  margin-bottom: var(--space-sm);
+  width: 90px;
+  animation:
+    trophyBounce 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
+    trophyGlow 2s ease-in-out 1.4s infinite;
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.3);
+}
+
+.trophyEmoji {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+@keyframes trophyBounce {
+  from {
+    transform: scale(0) rotate(-20deg);
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes trophyGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(74, 222, 128, 0.65);
+  }
+}
+
+/* ── Text ── */
+.title {
+  animation: fadeUp 400ms ease 0.4s both;
+  background: linear-gradient(135deg, #86efac, #4ade80, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  animation: fadeUp 400ms ease 0.5s both;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Stats row ── */
+.statsRow {
+  align-items: center;
+  animation: fadeUp 400ms ease 0.6s both;
+  background: rgba(74, 222, 128, 0.06);
+  border: 1px solid rgba(74, 222, 128, 0.18);
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  padding: var(--space-md) var(--space-lg);
+  width: 100%;
+}
+
+.stat {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.statValue {
+  color: #4ade80;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.statLabel {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.statDivider {
+  background: rgba(255, 255, 255, 0.1);
+  height: 36px;
+  width: 1px;
+}
+
+/* ── Date ── */
+.dateText {
+  animation: fadeUp 400ms ease 0.65s both;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.78rem;
+}
+
+/* ── Emoji row ── */
+.msgRow {
+  animation: fadeUp 400ms ease 0.7s both;
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+.msgEmoji {
+  animation: popIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  display: inline-block;
+  font-size: 1.6rem;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ── Close button ── */
+.closeBtn {
+  animation: fadeUp 400ms ease 0.85s both;
+  background: linear-gradient(
+    135deg,
+    rgba(74, 222, 128, 0.3),
+    rgba(34, 197, 94, 0.2)
+  );
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 20px rgba(74, 222, 128, 0.2);
+  color: #86efac;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: var(--space-sm);
+  padding: 12px 32px;
+  transition: all var(--transition-fast);
+}
+
+.closeBtn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 222, 128, 0.45),
+    rgba(34, 197, 94, 0.35)
+  );
+  box-shadow: 0 6px 30px rgba(74, 222, 128, 0.4);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.closeBtn:active {
+  transform: scale(0.97);
+}
