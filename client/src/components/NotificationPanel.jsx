@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTaskNotifications } from '../hooks/useTaskNotifications.js';
 import glassStyles from '../styles/glass.module.css';
 import styles from './NotificationPanel.module.css';
@@ -6,38 +7,42 @@ import TaskModal from './TaskModal.jsx';
 
 /**
  * Bell button + dropdown panel showing overdue / due-today / due-tomorrow tasks.
+ * The panel is rendered in a React portal so it never disrupts layout or z-index
+ * of surrounding sections.
  */
 export default function NotificationPanel() {
   const { overdue, dueToday, dueTomorrow, totalAlert, permission, requestPermission } =
     useTaskNotifications();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]       = useState(false);
   const [editTask, setEditTask] = useState(null);
+  const [pos, setPos]          = useState({ top: 0, right: 0 });
+
+  const bellRef  = useRef(null);
   const panelRef = useRef(null);
 
-  // Close on outside click
-  useEffect(() => {
-    if (!open) return;
-    function handler(e) {
-      if (panelRef.current && !panelRef.current.contains(e.target)) {
-        setOpen(false);
-      }
+  function handleBellClick() {
+    if (permission === 'default') requestPermission();
+    if (!open && bellRef.current) {
+      const rect = bellRef.current.getBoundingClientRect();
+      setPos({
+        top:   rect.bottom + 8,
+        right: window.innerWidth - rect.right,
+      });
     }
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [open]);
+    setOpen((v) => !v);
+  }
 
-  // Close on Escape
+  // Close panel on Escape
   useEffect(() => {
     if (!open) return;
-    function handler(e) {
-      if (e.key === 'Escape') setOpen(false);
-    }
+    const handler = (e) => { if (e.key === 'Escape') setOpen(false); };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [open]);
 
-  const isEmpty = overdue.length === 0 && dueToday.length === 0 && dueTomorrow.length === 0;
+  const isEmpty =
+    overdue.length === 0 && dueToday.length === 0 && dueTomorrow.length === 0;
 
   function openEdit(task) {
     setEditTask(task);
@@ -46,73 +51,96 @@ export default function NotificationPanel() {
 
   return (
     <>
-      <div className={styles.wrapper} ref={panelRef}>
-        <button
-          className={`${styles.bellBtn} ${totalAlert > 0 ? styles.hasAlert : ''}`}
-          onClick={() => {
-            if (permission === 'default') requestPermission();
-            setOpen((v) => !v);
-          }}
-          aria-label={`Notifications${totalAlert > 0 ? ` — ${totalAlert} urgent` : ''}`}
-          aria-expanded={open}
-        >
-          <span className={styles.bellIcon} aria-hidden="true">🔔</span>
-          {totalAlert > 0 && (
-            <span className={styles.badge}>{totalAlert > 9 ? '9+' : totalAlert}</span>
-          )}
-        </button>
+      {/* Bell trigger button — stays in navbar flow */}
+      <button
+        ref={bellRef}
+        className={`${styles.bellBtn} ${totalAlert > 0 ? styles.hasAlert : ''}`}
+        onClick={handleBellClick}
+        aria-label={`Notifications${totalAlert > 0 ? ` — ${totalAlert} urgent` : ''}`}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+      >
+        <span className={styles.bellIcon} aria-hidden="true">🔔</span>
+        {totalAlert > 0 && (
+          <span className={styles.badge}>{totalAlert > 9 ? '9+' : totalAlert}</span>
+        )}
+      </button>
 
-        {open && (
-          <div
-            className={`${glassStyles.glass} ${styles.panel}`}
-            role="dialog"
-            aria-label="Upcoming tasks"
-          >
-            <div className={styles.panelHeader}>
-              <span className={styles.panelTitle}>Upcoming Tasks</span>
-              {permission === 'default' && (
-                <button className={styles.enableBtn} onClick={requestPermission}>
-                  Enable alerts
+      {/* Portal: backdrop + panel rendered directly on <body> */}
+      {open &&
+        createPortal(
+          <>
+            {/* Transparent backdrop — captures outside clicks without darkening */}
+            <div className={styles.backdrop} onClick={() => setOpen(false)} />
+
+            {/* Panel */}
+            <div
+              ref={panelRef}
+              className={`${glassStyles.glass} ${styles.panel}`}
+              style={{ top: pos.top, right: pos.right }}
+              role="dialog"
+              aria-label="Upcoming tasks"
+              aria-modal="false"
+            >
+              <div className={styles.panelHeader}>
+                <span className={styles.panelTitle}>🔔 Upcoming Tasks</span>
+                <button
+                  className={styles.closeBtn}
+                  onClick={() => setOpen(false)}
+                  aria-label="Close notifications"
+                >
+                  ✕
                 </button>
+              </div>
+
+              {permission === 'default' && (
+                <div className={styles.permissionBar}>
+                  <span>Enable browser alerts?</span>
+                  <button className={styles.enableBtn} onClick={requestPermission}>
+                    Allow
+                  </button>
+                </div>
               )}
               {permission === 'denied' && (
-                <span className={styles.denied}>Notifications blocked</span>
+                <div className={styles.permissionBar}>
+                  <span className={styles.denied}>Browser notifications are blocked</span>
+                </div>
+              )}
+
+              {isEmpty ? (
+                <p className={styles.empty}>🎉 All caught up — no upcoming tasks!</p>
+              ) : (
+                <div className={styles.groups}>
+                  {overdue.length > 0 && (
+                    <TaskGroup
+                      label="Overdue"
+                      accent="var(--color-overdue)"
+                      tasks={overdue}
+                      onEdit={openEdit}
+                    />
+                  )}
+                  {dueToday.length > 0 && (
+                    <TaskGroup
+                      label="Due Today"
+                      accent="var(--color-doing)"
+                      tasks={dueToday}
+                      onEdit={openEdit}
+                    />
+                  )}
+                  {dueTomorrow.length > 0 && (
+                    <TaskGroup
+                      label="Due Tomorrow"
+                      accent="var(--color-todo)"
+                      tasks={dueTomorrow}
+                      onEdit={openEdit}
+                    />
+                  )}
+                </div>
               )}
             </div>
-
-            {isEmpty ? (
-              <p className={styles.empty}>🎉 All caught up — no upcoming tasks!</p>
-            ) : (
-              <div className={styles.groups}>
-                {overdue.length > 0 && (
-                  <TaskGroup
-                    label="Overdue"
-                    accent="var(--color-overdue)"
-                    tasks={overdue}
-                    onEdit={openEdit}
-                  />
-                )}
-                {dueToday.length > 0 && (
-                  <TaskGroup
-                    label="Due Today"
-                    accent="var(--color-doing)"
-                    tasks={dueToday}
-                    onEdit={openEdit}
-                  />
-                )}
-                {dueTomorrow.length > 0 && (
-                  <TaskGroup
-                    label="Due Tomorrow"
-                    accent="var(--color-todo)"
-                    tasks={dueTomorrow}
-                    onEdit={openEdit}
-                  />
-                )}
-              </div>
-            )}
-          </div>
+          </>,
+          document.body
         )}
-      </div>
 
       {editTask && (
         <TaskModal mode="edit" task={editTask} onClose={() => setEditTask(null)} />
