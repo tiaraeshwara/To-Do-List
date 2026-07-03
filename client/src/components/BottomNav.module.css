@@ -1,0 +1,115 @@
+/* Only shown on mobile — desktop hides via media query in App.module.css */
+.nav {
+  align-items: center;
+  background: rgba(10, 20, 15, 0.88) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 22px 22px 0 0 !important;
+  border-top: 1px solid rgba(74, 222, 128, 0.2) !important;
+  bottom: 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.35) !important;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+  padding-top: var(--space-sm);
+  position: fixed;
+  right: 0;
+  z-index: 60;
+}
+
+/* ── Nav tab ── */
+.tab {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  font-family: var(--font-body);
+  gap: 3px;
+  max-width: 80px;
+  padding: 6px 4px;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.tab.active {
+  color: #4ade80;
+}
+
+.tabIcon {
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.tab.active .tabIcon {
+  transform: translateY(-2px);
+}
+
+.tabLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.activeDot {
+  background: #4ade80;
+  border-radius: var(--radius-pill);
+  bottom: 2px;
+  box-shadow: 0 0 6px #4ade80;
+  height: 3px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 20px;
+}
+
+/* ── FAB (Floating Action Button) ── */
+.fab {
+  align-items: center;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  border: none;
+  border-radius: 50%;
+  box-shadow:
+    0 4px 20px rgba(74, 222, 128, 0.45),
+    0 0 0 3px rgba(74, 222, 128, 0.15);
+  color: #0a1f14;
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font-weight: 700;
+  height: 52px;
+  justify-content: center;
+  margin-bottom: 6px;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  width: 52px;
+}
+
+.fabIcon {
+  font-size: 1.8rem;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.fab:hover {
+  box-shadow:
+    0 6px 28px rgba(74, 222, 128, 0.6),
+    0 0 0 3px rgba(74, 222, 128, 0.25);
+  transform: scale(1.08);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}

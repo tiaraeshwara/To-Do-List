@@ -9,6 +9,22 @@
   z-index: 50;
 }
 
+/* Hide on mobile (BottomNav replaces these) */
+.desktopOnly {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none !important;
+  }
+
+  .navbar {
+    margin: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
 /* ── Brand ── */
 .brand {
   align-items: center;
