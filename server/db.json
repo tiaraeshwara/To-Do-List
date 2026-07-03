@@ -18,5 +18,25 @@
     "dueDate": "2026-08-03",
     "createdAt": "2026-07-03T06:39:08.828Z",
     "updatedAt": "2026-07-03T07:25:18.705Z"
+  },
+  {
+    "id": "0468f646-7ad8-4b7f-817d-41ece2953812",
+    "title": "prepare interview",
+    "description": "",
+    "status": "todo",
+    "timeAllocated": 40,
+    "dueDate": "2026-08-02",
+    "createdAt": "2026-07-03T07:29:37.928Z",
+    "updatedAt": "2026-07-03T07:29:37.928Z"
+  },
+  {
+    "id": "163fb080-fd4b-4394-8ba3-2d886af55279",
+    "title": "mid exam",
+    "description": "database exam ",
+    "status": "done",
+    "timeAllocated": 15,
+    "dueDate": "2026-06-02",
+    "createdAt": "2026-07-03T07:31:20.267Z",
+    "updatedAt": "2026-07-03T07:31:20.267Z"
   }
 ]
